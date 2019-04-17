@@ -1,0 +1,3 @@
+[submodule "Bedrock"]
+	path = Bedrock
+	url = git@github.com:Expensify/Bedrock.git
