@@ -8,7 +8,6 @@ PROJECT = $(shell pwd)
 
 
 # include project libs
-GXXPATH +=  -I$(PROJECT)/Bedrock -I$(PROJECT)/Bedrock/plugins -I$(PROJECT)/Bedrock/mbedtls/include -I $(PROJECT)
 INCLUDE_PATH +=  -I$(PROJECT)/Bedrock -I$(PROJECT)/Bedrock/plugins -I$(PROJECT)/Bedrock/mbedtls/include -I $(PROJECT)
 CXXFLAGS = -g -std=c++14 -fPIC -O2 -Wall -Werror -Wformat-security
 
@@ -20,13 +19,12 @@ Bedrock/bedrock:
 	cd Bedrock && make bedrock
 
 gameengine.so: GameEngine.h GameEngine.o
-	$(GXX) -v $(GXXPATH) GameEngine.o -o $@ -shared  
+	$(GXX) -v $(INCLUDE_PATH) GameEngine.o -o $@ -shared  
 
 GameEngine.o: GameEngine.cpp 
 	$(GXX) -v $(CXXFLAGS) $(INCLUDE_PATH) -Wl,--no-undefined GameEngine.cpp -o $@ -c
 
-test:
-	cd test && $(MAKE)
-
 clean:
 	cd Bedrock && make clean
+	rm GameEngine.o
+	rm gameengine.so
