@@ -6,18 +6,27 @@ endif
 # We use our project directory as a search path so we don't need "../../../.." all over the place.
 PROJECT = $(shell pwd)
 
-# include standard libs
-GXXPATH = -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6
-# include project libs
-GXXPATH +=  -I$(PROJECT)/Bedrock -I$(PROJECT)/Bedrock/mbedtls/include
 
-gameengine: GameEngine.h
-	#gcc-6 -v $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) $(LIBRARIES) GameEngine.h
-	#gcc-6 -v -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 GameEngine.h
-	$(GXX) -v $(GXXPATH) GameEngine.h
+# include project libs
+GXXPATH +=  -I$(PROJECT)/Bedrock -I$(PROJECT)/Bedrock/plugins -I$(PROJECT)/Bedrock/mbedtls/include -I $(PROJECT)
+INCLUDE_PATH +=  -I$(PROJECT)/Bedrock -I$(PROJECT)/Bedrock/plugins -I$(PROJECT)/Bedrock/mbedtls/include -I $(PROJECT)
+CXXFLAGS = -g -std=c++14 -fPIC -O2 -Wall -Werror -Wformat-security
+
+.PHONY: all 
+
+all: Bedrock/bedrock GameEngine.o gameengine.so
+
+Bedrock/bedrock:
+	cd Bedrock && make bedrock
+
+gameengine.so: GameEngine.h GameEngine.o
+	$(GXX) -v $(GXXPATH) GameEngine.o -o $@ -shared  
+
+GameEngine.o: GameEngine.cpp 
+	$(GXX) -v $(CXXFLAGS) $(INCLUDE_PATH) -Wl,--no-undefined GameEngine.cpp -o $@ -c
 
 test:
 	cd test && $(MAKE)
 
 clean:
-	cd test && make clean
+	cd Bedrock && make clean
