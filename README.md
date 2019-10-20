@@ -9,14 +9,16 @@ Past objectives:
 create a makefile
 get code to compile
 get plugin to load
+update position 
+support multiple users
 
 Current objective:
-update position (store across repeat requests)
+store position between requests
 
 Future objectives:
-multiple users
 require authentication
 add collision detection
+add automated testing
 add momentum
 add projectiles
 add 3 dimensions

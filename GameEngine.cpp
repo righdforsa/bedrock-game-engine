@@ -15,7 +15,6 @@ bool BedrockPlugin_GameEngine::peekCommand(SQLite& db, BedrockCommand& command) 
 
     // TODO replace with a map of names->functions, or something
     if (SIEquals(requestVerb,"updatePosition")) {
-        SINFO("yay, we did it");
         updatePosition::peek(command);
     } else {
         STHROW("404 no such command ");

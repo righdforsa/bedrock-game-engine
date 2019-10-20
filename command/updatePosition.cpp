@@ -1,6 +1,11 @@
 
 namespace updatePosition {
     void peek(BedrockCommand& command) {
+        string accountID = command.request["accountID"];
+        if (accountID.empty()) {
+            STHROW("401 Invalid request");
+        }
+
         list<string> coordinates;
         SINFO("command.request[\"coordinates\"]: " << command.request["coordinates"]);
         coordinates = SParseJSONArray(command.request["coordinates"]);
