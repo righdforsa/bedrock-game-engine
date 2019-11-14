@@ -20,11 +20,17 @@ Bedrock/bedrock:
 
 gameengine.so: GameEngine.h GameEngine.o
 	$(GXX) -v $(INCLUDE_PATH) GameEngine.o -o $@ -shared  
+	touch /tmp/gameengine.db
 
 GameEngine.o: GameEngine.cpp 
 	$(GXX) -v $(CXXFLAGS) $(INCLUDE_PATH) -Wl,--no-undefined GameEngine.cpp -o $@ -c
 
 clean:
+	rm GameEngine.o
+	rm gameengine.so
+	pkill bedrock
+
+clean_all:
 	cd Bedrock && make clean
 	rm GameEngine.o
 	rm gameengine.so

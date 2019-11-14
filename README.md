@@ -11,14 +11,14 @@ get code to compile
 get plugin to load
 update position 
 support multiple users
+store position between requests
 
 Current objective:
-store position between requests
+add automated testing
 
 Future objectives:
 require authentication
 add collision detection
-add automated testing
 add momentum
 add projectiles
 add 3 dimensions
@@ -28,5 +28,5 @@ performance test against 1000 users
 
 command to start the prog:
 ```
-/vagrant/bedrock-game-engine/Bedrock/bedrock         -live         -fork         -maxJournalSize 1000000         -pidFile /var/run/bedrock         -quorumCheckpoint 100         -plugins db,/vagrant/bedrock-game-engine/gameengine         -peerList          -db /tmp/gameengine.db         -serverHost localhost:4000         -nodeName localhost         -nodeHost localhost:8889         -priority 500          
+/vagrant/bedrock-game-engine/Bedrock/bedrock         -v	-live         -fork         -maxJournalSize 1000000         -pidFile /var/run/bedrock         -quorumCheckpoint 100         -plugins db,/vagrant/bedrock-game-engine/gameengine         -peerList          -db /tmp/gameengine.db         -serverHost localhost:4000         -nodeName localhost         -nodeHost localhost:8889         -priority 500          
 ```
